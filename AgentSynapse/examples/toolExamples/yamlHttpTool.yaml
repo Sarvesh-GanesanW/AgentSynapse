@@ -1,0 +1,29 @@
+name: weather-api
+version: 1.0.0
+description: Get weather information for a location
+type: http
+url: https://api.weather.example.com/current
+method: POST
+headers:
+  Content-Type: application/json
+inputSchema:
+  type: object
+  properties:
+    location:
+      type: string
+      description: City name or coordinates
+    units:
+      type: string
+      enum: [celsius, fahrenheit]
+      default: celsius
+  required:
+    - location
+outputSchema:
+  type: object
+  properties:
+    temperature:
+      type: number
+    condition:
+      type: string
+    humidity:
+      type: number

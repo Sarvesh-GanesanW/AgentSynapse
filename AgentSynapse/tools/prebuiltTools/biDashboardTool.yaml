@@ -1,0 +1,19 @@
+type: http
+url: https://bi.example.com/api/v1/dashboards
+method: POST
+headers:
+  Content-Type: application/json
+  X-Tenant-ID: "{{ tenantContext.tenantId }}"
+  Authorization: "Bearer {{ authToken }}"
+bodyTemplate:
+  name: "{{ toolInput.name }}"
+  datasourceId: "{{ toolInput.datasourceId }}"
+  layoutConfig: "{{ toolInput.layoutConfig }}"
+  filters: "{{ toolInput.filters | default([]) }}"
+  refreshPolicy: "{{ toolInput.refreshPolicy | default('manual') }}"
+  metadata:
+    requestedBy: "{{ tenantContext.userId }}"
+    orgId: "{{ tenantContext.orgId }}"
+notes:
+  - "Set the BI service base URL via configuration or environment if it differs."
+  - "Requires the calling user to possess a valid auth token with dashboard:create scope."

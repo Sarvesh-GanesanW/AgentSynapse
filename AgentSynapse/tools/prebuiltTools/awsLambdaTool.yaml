@@ -1,0 +1,21 @@
+type: lambda
+functionName: ace-demo-tool-runner
+payloadTemplate:
+  tenantContext:
+    tenantId: "{{ tenantContext.tenantId }}"
+    userId: "{{ tenantContext.userId }}"
+    orgId: "{{ tenantContext.orgId }}"
+  input: "{{ toolInput }}"
+  metadata:
+    source: "prebuiltTools.awsLambdaTool"
+    requestId: "{{ requestId }}"
+executionRolePolicy:
+  Version: "2012-10-17"
+  Statement:
+    - Effect: Allow
+      Action:
+        - "lambda:InvokeFunction"
+      Resource: "arn:aws:lambda:*:*:function:ace-demo-tool-runner"
+notes:
+  - "Grant the ACE execution IAM role invoke permissions for the target Lambda."
+  - "Extend the payloadTemplate if downstream logic requires additional fields."
