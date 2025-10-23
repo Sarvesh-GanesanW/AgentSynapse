@@ -112,7 +112,6 @@ async def extractTenantContext(request: Request) -> TenantContext:
         permissions=permissions
     )
 
-    # Store useful attributes on request.state for downstream handlers
     request.state.subdomain = subdomain
     request.state.username = user_info["user"]
     request.state.group = user_info["group"]
